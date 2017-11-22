@@ -81,7 +81,7 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)options)
     } else {
         _settings = [[NSMutableDictionary alloc] initWithDictionary:options];
         // Change Configuaration
-        [self.callKitProvider setConfiguration:extracted(self)];
+        [self.callKitProvider setConfiguration:[self getProviderConfiguration]];
     }
 }
 
