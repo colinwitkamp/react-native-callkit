@@ -73,10 +73,16 @@ RCT_EXPORT_METHOD(setup:(NSDictionary *)options)
     NSLog(@"[RNCallKit][setup] options = %@", options);
 #endif
     _version = [[[NSProcessInfo alloc] init] operatingSystemVersion];
-    self.callKitCallController = [[CXCallController alloc] init];
-    _settings = [[NSMutableDictionary alloc] initWithDictionary:options];
-    self.callKitProvider = [[CXProvider alloc] initWithConfiguration:[self getProviderConfiguration]];
-    [self.callKitProvider setDelegate:self queue:nil];
+    if (self.callKitCallController == nil) {
+        self.callKitCallController = [[CXCallController alloc] init];
+        _settings = [[NSMutableDictionary alloc] initWithDictionary:options];
+        self.callKitProvider = [[CXProvider alloc] initWithConfiguration:[self getProviderConfiguration]];
+        [self.callKitProvider setDelegate:self queue:nil];
+    } else {
+        _settings = [[NSMutableDictionary alloc] initWithDictionary:options];
+        // Change Configuaration
+        [self.callKitProvider setConfiguration:extracted(self)];
+    }
 }
 
 #pragma mark - CXCallController call actions
