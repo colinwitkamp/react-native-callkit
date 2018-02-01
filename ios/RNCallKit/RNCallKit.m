@@ -207,6 +207,8 @@ RCT_EXPORT_METHOD(reportConnectedOutgoingCallWithUUID:(NSString *)uuidString)
 {
     if (_version.majorVersion < 10) {
         return YES;
+    } else if (_version.majorVersion > 10) {
+        return NO;
     } else {
         return _version.minorVersion < 2;
     }
