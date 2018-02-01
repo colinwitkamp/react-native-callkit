@@ -5,8 +5,9 @@ import {
     NativeEventEmitter,
     Platform,
 } from 'react-native';
-import validateUuid from 'is-uuid';
+import isUuid from 'is-uuid';
 
+const validateUuid = isUuid.anyNonNil;
 const _RNCallKit = NativeModules.RNCallKit;
 const _RNCallKitEmitter = new NativeEventEmitter(_RNCallKit);
 
