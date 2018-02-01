@@ -5,6 +5,7 @@ import {
     NativeEventEmitter,
     Platform,
 } from 'react-native';
+import validateUuid from 'uuid-validate';
 
 const _RNCallKit = NativeModules.RNCallKit;
 const _RNCallKitEmitter = new NativeEventEmitter(_RNCallKit);
@@ -68,22 +69,30 @@ export default class RNCallKit {
 
     static displayIncomingCall(uuid, handle, handleType = 'number', hasVideo = false) {
         if (Platform.OS !== 'ios') return;
-        _RNCallKit.displayIncomingCall(uuid, handle, handleType, hasVideo);
+        if (validateUuid(uuid)) {
+            _RNCallKit.displayIncomingCall(uuid, handle, handleType, hasVideo);
+        }
     }
 
     static startCall(uuid, handle, handleType = 'number', hasVideo = false) {
         if (Platform.OS !== 'ios') return;
-        _RNCallKit.startCall(uuid, handle, handleType, hasVideo);
+        if (validateUuid(uuid)) {
+            _RNCallKit.startCall(uuid, handle, handleType, hasVideo);
+        }
     }
 
     static reportConnectedOutgoingCallWithUUID(uuid) {
         if (Platform.OS !== 'ios') return;
-        _RNCallKit.reportConnectedOutgoingCallWithUUID(uuid);
+        if (validateUuid(uuid)) {
+            _RNCallKit.reportConnectedOutgoingCallWithUUID(uuid);
+        }
     }
 
     static endCall(uuid) {
         if (Platform.OS !== 'ios') return;
-        _RNCallKit.endCall(uuid);
+        if (validateUuid(uuid)) {
+            _RNCallKit.endCall(uuid);
+        }
     }
 
     /*
